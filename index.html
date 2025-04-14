@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alpine.js</title>
     <!-- Alpine -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Tailwind -->
@@ -14,27 +14,54 @@
 </head>
 
 <body class="bg-gray-100">
-    <div x-data="{ contador: 0 }"
-        class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white">
-        <button x-on:click="contador++"
+    <div x-data="data()" x-init="iniciar()" class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white">
+        <button x-on:click="sumar()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Increment</button>
         <span x-text="contador" class="text-2xl font-bold"></span>
-        <button x-on:click="contador--"
+        <button x-on:click="restar()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Decrement</button>
     </div>
 
-    <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white"
-        x-data="{ menu: false }">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" x-on:click="menu = !menu">
-            <i class="fa-solid fa-bars"></i> </button>
-        <div x-show="menu" x-on:click.away="menu = false" class="mt-4 transition-all duration-300">
-            <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-            </ul>
+    <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="data()">
+        <div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                x-on:click="toggleMenu()">
+                <i class="fa-solid fa-bars"></i> </button>
+            <div x-show="menu" x-on:click.away="ocultar()" class="mt-4 transition-all duration-300">
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            </div>
         </div>
+
     </div>
+
+    <script>
+        function data() {
+            return {
+                contador:0,
+                menu: false,
+                iniciar(){
+                    this.contador = 10;
+                },
+                sumar() {
+                    this.contador++
+                },
+                restar() {
+                    this.contador--
+                },
+                toggleMenu() {
+                    this.menu = !this.menu
+                },
+                ocultar() {
+                    this.menu = false
+                }
+
+            }
+        }
+    </script>
 </body>
 
 </html>
