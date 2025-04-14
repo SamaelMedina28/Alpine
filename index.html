@@ -25,7 +25,7 @@
     </div>
     <!--! Segundo contenedor -->
     <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="data()">
-        <div>
+        <div @click.away="ocultar()">
             <button class="bg-blue-500  text-white font-bold py-2 px-4 rounded" @click="toggleMenu()"
                 x-bind:disabled="menu" :class="{
                     'bg-blue-500': !menu,
@@ -33,7 +33,7 @@
                 }">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <div x-show="menu" @click.away="ocultar()" class="mt-4 transition-all duration-300">
+            <div x-show="menu" class="mt-4 transition-all duration-300">
                 <ul>
                     <li>Item 1</li>
                     <li>Item 2</li>
@@ -77,6 +77,16 @@
                 </li>
             </template>
         </ul>
+    </div>
+    <!-- ! Quinto contenedor -->
+    <div @resize.window="open = window.innerWidth > 1024 ? true : false" class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="{mensaje: '', open: true}">
+        <form @submit.prevent="console.log(mensaje);">
+            <input type="text" x-model="mensaje" @keydown.arrow-down="console.log('Has presionado la tecla flecha abajo')" class="border-b-2 border-blue-300 ml-2 mt-4 pl-2">
+            <button type="submit" @click.away="console.log('Has hecho click afuera del boton')" class="bg-blue-500 text-white font-bold my-1 py-1 px-3 rounded">Enviar</button>
+        </form>
+        <p x-show="open" class=" text-center text-sky-400">
+            Este mensaje solo se mostrar desde una pantalla grande
+        </p>
     </div>
 
 
