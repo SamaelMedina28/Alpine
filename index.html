@@ -15,19 +15,26 @@
 
 <body class="bg-gray-100">
     <div x-data="data()" x-init="iniciar()" class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white">
-        <button x-on:click="sumar()"
+        <button @click="sumar()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Increment</button>
         <span x-text="contador" class="text-2xl font-bold"></span>
-        <button x-on:click="restar()"
+        <button @click="restar()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Decrement</button>
     </div>
 
     <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="data()">
         <div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                x-on:click="toggleMenu()">
-                <i class="fa-solid fa-bars"></i> </button>
-            <div x-show="menu" x-on:click.away="ocultar()" class="mt-4 transition-all duration-300">
+            <button class="bg-blue-500  text-white font-bold py-2 px-4 rounded"
+                @click="toggleMenu()"
+                x-bind:disabled="menu"
+                :class="{
+                    'bg-blue-500': !menu,
+                    'bg-blue-300': menu
+                }"
+                >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div x-show="menu" @click.away="ocultar()" class="mt-4 transition-all duration-300">
                 <ul>
                     <li>Item 1</li>
                     <li>Item 2</li>
