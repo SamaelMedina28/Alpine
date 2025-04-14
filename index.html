@@ -14,6 +14,7 @@
 </head>
 
 <body class="bg-gray-100">
+    <!-- ! Primer contenedor -->
     <div x-data="data()" x-init="iniciar()"
         class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white">
         <button @click="sumar()"
@@ -22,7 +23,7 @@
         <button @click="restar()"
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Decrement</button>
     </div>
-
+    <!--! Segundo contenedor -->
     <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="data()">
         <div>
             <button class="bg-blue-500  text-white font-bold py-2 px-4 rounded" @click="toggleMenu()"
@@ -42,7 +43,7 @@
         </div>
 
     </div>
-
+    <!--! Tercer contenedor -->
     <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="data()">
         <label for="">
             Ingresa texto
@@ -60,12 +61,53 @@
         </label>
         <p x-ref="mensaje" class=" text-center text-sky-400"></p>
     </div>
+    <!-- ! Cuarto contenedor -->
+    <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex justify-center bg-white" x-data="data()">
+        <ul>
+            <template x-for="product in products">
+                <li class="list-disc">
+                    <span x-text="product.id"></span> -
+                    <span x-text="product.name"></span>
+                    <template x-if="product.stock < 3 ">
+                        <div class="inline">
+                            (<span x-text="product.stock" class="text-red-500"></span>)
+                            <span> Casi agotado</span>
+                        </div>
+                    </template>
+                </li>
+            </template>
+        </ul>
+    </div>
 
 
-
+    <!-- ^ SCRIPTS -->
     <script>
         function data() {
             return {
+                products: [
+                    {
+                        id: 1,
+                        name: 'Pantalon',
+                        stock: 1
+                    },
+                    {
+                        id: 2,
+                        name: 'Camiseta',
+                        stock: 9
+                    },
+                    {
+                        id: 3,
+                        name: 'Zapatos',
+                        stock: 6
+                    },
+                    {
+                        id: 4,
+                        name: 'Bufanda',
+                        stock: 2
+                    }
+                ],
+
+                mensaje: '',
                 mensajeOrigen: null,
                 contador: 0,
                 menu: false,
