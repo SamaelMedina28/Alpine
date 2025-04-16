@@ -51,6 +51,7 @@
         </label>
         <p x-text="mensaje" class=" text-center text-sky-400"></p>
     </div>
+    <!--! Cuarto contenedor -->
     <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="data()">
         <label for="">
             Ingresa texto
@@ -61,7 +62,7 @@
         </label>
         <p x-ref="mensaje" class=" text-center text-sky-400"></p>
     </div>
-    <!-- ! Cuarto contenedor -->
+    <!-- ! Quinto contenedor -->
     <div class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex justify-center bg-white" x-data="data()">
         <ul>
             <template x-for="product in products">
@@ -78,16 +79,45 @@
             </template>
         </ul>
     </div>
-    <!-- ! Quinto contenedor -->
-    <div @resize.window="open = window.innerWidth > 1024 ? true : false" class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white" x-data="{mensaje: '', open: true}">
+    <!-- ! Sexto contenedor -->
+    <div @resize.window="open = window.innerWidth > 1024 ? true : false"
+        class="mx-auto w-1/3 shadow-lg p-4 rounded-lg mt-10 flex flex-col items-center bg-white"
+        x-data="{mensaje: '', open: true}">
         <form @submit.prevent="console.log(mensaje);">
-            <input type="text" x-model="mensaje" @keydown.arrow-down="console.log('Has presionado la tecla flecha abajo')" class="border-b-2 border-blue-300 ml-2 mt-4 pl-2">
-            <button type="submit" @click.away="console.log('Has hecho click afuera del boton')" class="bg-blue-500 text-white font-bold my-1 py-1 px-3 rounded">Enviar</button>
+            <input type="text" x-model="mensaje"
+                @keydown.arrow-down="console.log('Has presionado la tecla flecha abajo')"
+                class="border-b-2 border-blue-300 ml-2 mt-4 pl-2">
+            <button type="submit" @click.away="console.log('Has hecho click afuera del boton')"
+                class="bg-blue-500 text-white font-bold my-1 py-1 px-3 rounded">Enviar</button>
         </form>
         <p x-show="open" class=" text-center text-sky-400">
             Este mensaje solo se mostrar desde una pantalla grande
         </p>
     </div>
+
+    <!-- ! Séptimo contenedor -->
+    <div x-data class="mx-auto w-1/3 shadow-lg p-4 rounded-lg my-10 flex flex-col items-center bg-white">
+        <button @click="$el.textContent = 'Has hecho click'"
+            class="bg-blue-500 text-white font-bold my-1 py-1 px-3 rounded">
+            Boton 1
+        </button>
+        <p x-ref="nombre"></p>
+        <button @click="$refs.nombre.textContent = 'Has hecho click'"
+            class="bg-blue-500 text-white font-bold my-1 py-1 px-3 rounded">
+            Boton 2
+        </button>
+        <p x-ref="nombre" class="text-center text-sky-400">Un texto</p>
+        <input type="text" @input="console.log($event.target.value)" class="border-b-2 border-blue-300 ml-2 mt-1 pl-2">
+        <br>
+        <div x-data="{nombre: null}">
+            <input type="text" x-model="nombre" @input="$dispatch('evento-personalizado', nombre)"
+                class="border-2 border-blue-300 ml-2 mt-1 pl-2">
+        </div>  
+        <div x-data="{nombre: null}" @evento-personalizado.window="nombre = $event.detail">
+            <input type="text" x-model="nombre" class="border-2 border-blue-300 ml-2 mt-1 pl-2">
+        </div>
+    </div>
+
 
 
     <!-- ^ SCRIPTS -->
